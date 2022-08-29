@@ -46,8 +46,12 @@ class Blueprint extends \Illuminate\Database\Schema\Blueprint
             // Transform the columns to the required array format.
             $transform = [];
 
-            foreach ($columns as $column) {
-                $transform[$column] = 1;
+            foreach ($columns as $key => $column) {
+                if (is_numeric($key)) {
+                    $transform[$column] = 1;
+                } else {
+                    $transform[$key] = $column;
+                }
             }
 
             $columns = $transform;
